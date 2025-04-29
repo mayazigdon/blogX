@@ -1,0 +1,15 @@
+<%- include("./partials/header.ejs") %>
+
+
+    <section id="post">
+        <form action="/post" method="POST">
+            <img src="\Abby+kitten.png" height="80px" width="85px">
+            <div class="mb-3 input">
+                <input type="textPost" name="textPost" class="form-control" id="textPost"
+                    placeholder="What are you thinking about?" required>
+            </div>
+            <button type="submit" class="btn btn-secondary">post</button>
+        </form>
+    </section>
+
+    <%- include("./partials/footer.ejs") %>

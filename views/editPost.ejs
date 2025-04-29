@@ -1,0 +1,18 @@
+<%- include("./partials/header.ejs") %>
+<% if(locals.myPosts){
+    postsText = myPosts.get(key);
+} %>
+
+    <section id="post">
+        <form action="/saveNewText" method="POST">
+            <img src="\Abby+kitten.png" height="80px" width="85px">
+            <div class="mb-3 input">
+                <input type="textPost" name="textPost" class="form-control" id="textPost"
+                    value = "<%=postsText %>" >
+                <input type="hidden" name="key" value="<%= key %>">
+            </div>
+            <button type="submit" class="btn btn-secondary">post</button>
+        </form>
+    </section>
+
+    <%- include("./partials/footer.ejs") %>

@@ -1,0 +1,87 @@
+<%- include("./partials/header.ejs") %>
+    <% var now=new Date(); var formattedDate=now.toLocaleDateString('en-IL');%>
+    <% function isYesterday(now,key){
+        if(key.slice(0,2) == now.getDate()-1 && key.slice(3,5) == now.getMonth()+1 && key.slice(6,10) == now.getFullYear())
+            return true;
+        else {return false}; 
+    } %>
+
+<script>
+    function toggleOptions(button) {
+        const menu = button.nextElementSibling;
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+</script>
+
+
+
+        <section id="profile">
+            <div class="container">
+                <div class="profile-pic">
+                    <img src="\Abby+kitten.png" height="100px" width="105px">
+                </div>
+                <div class="username">
+                    <h1>
+                        <%=locals.myUsername %>
+                    </h1>
+                </div>
+                <div class="posts">
+                    <h2>posts</h2>
+                    <% console.log(myPosts); %>
+                    <% if (locals.myPosts) { %>
+                        <% locals.myPosts.forEach((value, key) => { %>
+                            <div class="postBubble">
+                                <div class="profile-img">
+                                    <img src="\Abby+kitten.png" height="30px" width="35px">
+                                    <p><%= locals.myUsername %></p>
+                                </div>
+                            
+                                <div class="content">
+                                    <p><%= value %></p>
+                                </div>
+                            
+                                <div class="ellipsis-button-container">
+                                    <button class="ellipsis-button" onclick="toggleOptions(this)">&#8942;</button>
+                            
+                                    <!-- Hidden options menu -->
+                                    <div class="options-menu" style="display: none;">
+                                        <ul>
+                                            <li><form  class="option" action="/editPost" method="POST">
+                                                <input type="hidden" name="key" value="<%= key %>">
+                                                <button type="submit" class="options">Edit</button>
+                                                </form>
+                                            </li>
+                                            <li> <form class="option" action="/deletePost" method="POST" >
+                                                <input type="hidden" name="key" value="<%= key %>">
+                                                <button type="submit" class="options">Delete</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            
+                                <div class="date">
+                                    <% if (formattedDate == key.slice(0,10)) { %>
+                                        <p><span class="badge">today</span> <%= key.slice(11) %></p>
+                                    <% } else if (isYesterday(now,key)) { %>
+                                        <span class="badge">yesterday</span> <%= key.slice(11) %></p>
+                                    <% } else { %>
+                                        <p><%= key %></p>
+                                    <% } %> 
+                                </div>
+                            </div>
+                            
+                        <% }); %> 
+                    <% } else { %>
+                        <p>You have no posts yet.</p>
+                    <% } %> 
+                </div>
+            </div>
+
+        </section>
+
+        <%- include("./partials/footer.ejs") %>

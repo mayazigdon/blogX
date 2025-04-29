@@ -1,0 +1,143 @@
+<%- include("./partials/header.ejs") %>
+<script>
+    function toggleOptions(button) {
+        const menu = button.nextElementSibling;
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+</script>
+<% function sortPostsByDate(posts) {
+    console.log("Sorting posts:", posts);
+
+    // Step 1: Flatten the posts into an array
+    let allPostsArray = [];
+
+    // Iterate over the posts Map and flatten it into an array of objects
+    posts.forEach((userPosts, user) => {
+        Object.entries(userPosts).forEach(([date, post]) => {
+            allPostsArray.push({ user, date, post });
+        });
+    });
+
+    console.log("allPostsArray:", allPostsArray);
+
+    // Step 2: Sort the posts array by date
+    allPostsArray.sort((a, b) => {
+        // Use Date.parse to handle any date format correctly
+        const dateA = Date.parse(a.date);
+        const dateB = Date.parse(b.date);
+        
+        // If the dates are invalid, return 0 to keep their position
+        if (isNaN(dateA) || isNaN(dateB)) {
+            return 0;
+        }
+        
+        return dateA - dateB; // Ascending order
+    });
+
+    console.log("Sorted allPostsArray:", allPostsArray);
+
+    // Step 3: Rebuild the structure after sorting, keeping the Map structure
+    let sortedPosts = new Map();
+
+    allPostsArray.forEach(({ user, date, post }) => {
+        if (!sortedPosts.has(user)) {
+            sortedPosts.set(user, {});
+        }
+        sortedPosts.get(user)[date] = post;
+    });
+    reversedSortedPosts = new Map([...sortedPosts].reverse());
+    console.log("sortedPosts:", reversedSortedPosts);
+    return reversedSortedPosts;
+} %>
+
+
+
+
+    <% var now=new Date(); var formattedDate=now.toLocaleDateString('en-IL');%>
+        <% function isYesterday(now,key){ if(key.slice(0,2)==now.getDate()-1 && key.slice(3,5)==now.getMonth()+1 &&
+            key.slice(6,10)==now.getFullYear()) return true; else {return false}; } %>
+            <section id="home">
+                <h1>posts</h1>
+                <% var allPosts=new Map(); if (locals.posts) { Object.entries(posts).forEach(([user, userPosts])=> {
+                    userPosts = userPosts || {};
+                    if (!allPosts.has(user)) {
+                    allPosts.set(user, {});
+                    }
+                    Object.entries(userPosts).forEach(([date, post]) => {
+                    allPosts.get(user)[date] = post;
+                    });
+                    });
+                    };
+
+                    if (locals.myPosts) {
+                    locals.myPosts.forEach((value, key) => {
+                    if (!allPosts.has(username)) {
+                    allPosts.set(username, {});
+                    }
+                    allPosts.get(username)[key] = value;
+                    });
+                    }
+
+                    console.log("allposts:", allPosts);
+                    %>
+
+                    <% if (allPosts) { %>
+                        <%  const sortedPosts = sortPostsByDate(allPosts);%>
+                        <% console.log("ddfdvv",sortedPosts); %>
+                        <% sortedPosts.forEach((userPosts, user)=> {
+                            Object.entries(userPosts).forEach(([date, post]) => { %>
+                            <% console.log("user: ",user );
+                                console.log(" date: ",date );
+                                console.log(" post: ",post );
+                                %>
+                            <div class=" postBubble">
+                                <div class="profile-img">
+                                    <img src="<%=images[user] %>" height="30px" width="35px">
+                                    <p>
+                                        <%=user %>
+                                    </p>
+                                </div>
+                                <div class="content">
+                                    <p>
+                                        <%= post %>
+                                    </p>
+                                </div>
+                                <% if(user == username){ %>
+                                    <div class="ellipsis-button-container">
+                                    <button class="ellipsis-button" onclick="toggleOptions(this)">&#8942;</button>
+                            
+                                    <div class="options-menu" style="display: none;">
+                                        <ul>
+                                            <li><button onclick="editPost()" class="options">Edit</button></li>
+                                            <li><button onclick="deletePost(key)"class="options">Delete</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <% } %>
+                                <div class="date">
+                                    <% if (formattedDate==date.slice(0,10)) { %>
+                                        <p><span class="badge">today</span>
+                                            <%= date.slice(11) %>
+                                        </p>
+                                        <% } else if (isYesterday(now,date)) { %>
+                                            <span class="badge">yesterday</span>
+                                            <%= date.slice(11) %>
+                                                </p>
+                                                <% } else { %>
+                                                    <p>
+                                                        <%= date %>
+                                                    </p>
+                                                    <% } %>
+                                </div>
+                                </div>
+                                <% }); }); %>
+                                    <% } else { %>
+                                        <p>You have no posts yet.</p>
+                                        <% } %>
+            </section>
+
+            <%- include("./partials/footer.ejs") %>

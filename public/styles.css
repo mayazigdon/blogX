@@ -1,0 +1,279 @@
+.header {
+    background-color: aqua;
+    width: 100%;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 8%;
+    z-index: 5;
+}
+
+body {
+    width: 99vw;
+    margin: 0;
+}
+
+.footer {
+    width: 100%;
+}
+
+.log-in {
+    background-color: #f2f4f7;
+    margin-top: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center !important;
+    margin-top: 10%;
+}
+
+.cal-sans-regular {
+    font-family: "Cal Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.log-in h1 {
+    margin-top: 0;
+    font-size: 4rem;
+}
+
+.input{
+    width: 300px;
+}
+
+form{
+    background-color: white;
+    display: block;
+    width: 350px;
+    padding: 20px;
+    border-radius: 0.5cm;
+    position: relative;
+    left: 40%;
+}
+
+#post{
+    height:100vh;
+}
+
+#post form{
+    position: relative;
+    left: 25%;
+    top:30%;
+    background-color: #f2f4f7;
+    width: 800px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 200px;
+    padding: 30px;
+}
+
+img{
+    border-radius: 50%;
+}
+
+#post input{
+    background-color:  #f2f4f7;
+    border: 0;
+    margin-top: 5%;
+    width: 580px;
+}
+
+#post .btn{
+   margin-left: 280px;
+}
+
+#contact{
+    height: 60vh;
+    margin-top: 5%;
+    padding-right: 0;
+    margin-left: 5%;
+    margin-top: 15%;
+    margin-bottom: 0;
+}
+
+.contact-title{
+    font-weight: 600 !important;
+}
+
+#about .container{
+    display: flex;
+    justify-content: flex-start;
+    gap:30px;
+    height: 65vh;
+    margin-top: 10%;
+}
+
+.about-description{
+    margin-top: 3%;
+}
+
+#contact .container{
+    display: flex;
+    justify-content: flex-start;
+    gap:30px;
+    height: 65vh;
+    margin-top: 10%;
+}
+
+.contact-description{
+    margin-top: 4%;
+}
+
+#profile .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+    height: 100%;
+    margin-top: 10%;
+
+}
+.posts{
+    align-self: flex-start;
+}
+
+.postBubble {
+    background-color: #f2f4f7;
+    border-radius: 16px;
+    padding: 16px 20px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.content p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    word-wrap: break-word;
+}
+
+
+.postBubble {
+    position: relative;  /* This is critical for absolute positioning */
+    background-color: #f2f4f7;
+    border-radius: 16px;
+    padding: 16px 20px;
+    padding-bottom: 5px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.ellipsis-button-container {
+    position: absolute;   /* Absolute positioning within .postBubble */
+    top: 16px;            /* Distance from the top */
+    right: 5px;          /* Distance from the right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ellipsis-button {
+    background-color: transparent;
+    border: none;
+    font-size: 22px;  /* Adjust size to be clear */
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.2s ease;
+    width: 25px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+    padding-left: 30px;
+}
+
+
+.date {
+    align-self: flex-end;
+    font-size: 12px;
+    color: #888;
+}
+
+.date p {
+    margin: 0;
+}
+
+.badge {
+    background-color: #007bff; /* bright blue */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+}
+
+.profile-img p{
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 0;
+}
+
+.content p {
+    font-weight: 500;
+}
+
+#home{
+    height: 100%;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-bottom: 10%;
+}
+
+#home h1{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.options-menu {
+    background: white;
+    border: 1px solid #ccc;
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    width: 100px;
+    z-index: 1000;
+}
+.options-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.options-menu ul li {
+    padding: 8px 10px;
+    padding-left: 0;
+    cursor: pointer;
+}
+.options-menu ul li:hover {
+    background-color: #f0f0f0;
+}
+.options{
+    border: none;
+    background-color: white;
+}
+.option{
+    display: flex; 
+    background-color: transparent; 
+    justify-content: flex-start; 
+    width:fit-content; 
+    padding:0;
+    border: none;
+}
